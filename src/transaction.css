@@ -1,0 +1,48 @@
+#home-container2{
+    margin-top: 5%;
+    margin-bottom: 5%;
+    display: flex;
+    justify-content: space-between;
+  }
+  #home-background{
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .trans{
+    font-family: 'Fjalla One', cursive;
+    border-radius: 25em;
+    /* background-color: rgba(44, 23, 63, 0.925); */
+    line-height: 2em;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    width: 16em;
+    font-size: 1em;
+    color: #ecf0f1;
+    text-shadow: -1px -1px 0 #010102, 1px -1px 0 #050708, -1px 1px 0 #080b0e, 1px 1px 0 #0a0f13;
+    
+  }
+
+  #x{
+    width: 15px;
+  }
+  #x:hover{
+    width: 25px;
+  }
+
+  .price{
+    font-family: 'Lobster', cursive;
+    font-size: 15px;
+    color: rgb(255, 255, 255);
+    text-shadow: -0.1px -0.1px 1.5px #ffffff, 0.1px -0.1px 0 #ffffff, -0.1px 0.1px 0 #000000, 0.1px 0.1px 0 #000000;
+  }
+
+  .price:hover{
+font-size: 30px;
+  }
+
+  @font-face {
+    font-family: Lucy Thr Cat;
+    src: url(lucythecatregular-bg9x-webfont.woff);
+  }
+  
