@@ -1,17 +1,16 @@
-
-import React from 'react';
+import React from 'react'
 
 class Menu extends React.Component {
     constructor(props){
-      super(props);
+      super(props)
       this.state={
         open: this.props.open? this.props.open:false,
       }
     }
       
-    componentWillReceiveProps(nextProps){
+    componentWillReceiveProps = nextProps => {
       if(nextProps.open !== this.state.open){
-        this.setState({open:nextProps.open});
+        this.setState({open:nextProps.open})
       }
     }
     
@@ -47,4 +46,4 @@ class Menu extends React.Component {
       )
     }
   }
-  export default Menu;
+  export default Menu

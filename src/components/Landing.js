@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import moment from 'moment'
 import Timer from './Timer'
 import GlobusGif from '../globus.gif'
+
 class Landing extends Component {
     constructor() {
         super()

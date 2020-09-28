@@ -1,15 +1,15 @@
-import React from 'react';
+import React from 'react'
 
 class MenuItem extends React.Component{
     constructor(){
-      super();
+      super()
       this.state = {
         hover:false,
       }
     }
     
     handleHover(){
-      this.setState({hover:!this.state.hover});
+      this.setState({hover:!this.state.hover})
     }
     
     render(){

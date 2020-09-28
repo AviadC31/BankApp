@@ -1,42 +1,40 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import axios from 'axios';
-
+import axios from 'axios'
 
 class Operations extends Component {
   constructor() {
     super()
     this.state = {
-      amount: "",
-      vendor: "",
-      category: "",
+      amount: '',
+      vendor: '',
+      category: '',
       activity: false
     }
   }
-  handleInputChange = event => {
-    const target = event.target;
-    const value = target.name === '' ? target.checked : target.value;
-    const name = target.name;
 
-    this.setState({
-      [name]: value
-    });
+  handleInputChange = event => {
+    const target = event.target
+    const value = target.name === '' ? target.checked : target.value
+    const name = target.name
+    this.setState({ [name]: value })
   }
-  money = async (e) => {
+
+  moneyTransfer = async (e) => {
     const s = this.state
     const transaction = {
       amount: e.target.id === 'add' ? s.amount : -s.amount,
       vendor: s.vendor,
       category: s.category
     }
-    const t = await axios.post("http://localhost:8080/transaction", transaction)
-    this.props.state.data.push(t.data)
-    this.props.money(this.props.state.data)
+    const transDetails = await axios.post("http://localhost:8080/transaction", transaction)
+    let arr=[]
+    arr =[...this.props.state.data]
+    arr.push(transDetails.data)
+    this.props.moneyTransfer(arr)
     this.setState({ activity: true })
   }
-  operationAction = () => <p>A new Operation detected, check{' '}
-                              <Link to="/transactions">Transactions</Link>{' '}to view
-                          </p>
+
   render() {
     return (
       <div>
@@ -72,10 +70,22 @@ class Operations extends Component {
           </div>
         </div>
         <div>
-          <p className="main-directory-text-2">Balance: {this.props.state.balance} $</p>
-          <button id="add" onClick={this.money}>Deposit</button>
-          <button id="dec" onClick={this.money}>Withdraw</button>
-          <p className="main-directory-text-2">{this.state.activity ? this.operationAction() : null}</p>
+          <p className="main-directory-text-2" style={{ 'color': 'gold' }}>Balance:
+          <span> </span>
+            <span style={{ 'color': `${this.props.state.balance < 0 ? 'red' : 'green'}` }}>
+              {this.props.state.balance}
+            </span> $
+          </p>
+          <button id="add" onClick={this.moneyTransfer}>Deposit</button>
+          <button id="dec" onClick={this.moneyTransfer}>Withdraw</button>
+          <p className="main-directory-text-2">
+            { this.state.activity ?
+                <p>A new Operation detected, check{' '}
+                  <Link to="/transactions">Transactions</Link>{' '}to view
+                </p> 
+              : null
+            }
+          </p>
         </div>
         <div className="backBox">
           <p className="back">Back</p>
@@ -85,7 +95,7 @@ class Operations extends Component {
         </div>
       </div >
 
-    );
+    )
   }
 }
-export default Operations;
+export default Operations

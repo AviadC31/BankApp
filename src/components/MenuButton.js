@@ -1,9 +1,8 @@
-
-import React from 'react';
+import React from 'react'
 
   class MenuButton extends React.Component {
     constructor(props){
-      super(props);
+      super(props)
       this.state={
         open: this.props.open? this.props.open:false,
         color: this.props.color? this.props.color:'black',
@@ -12,12 +11,12 @@ import React from 'react';
   
     componentWillReceiveProps(nextProps){
       if(nextProps.open !== this.state.open){
-        this.setState({open:nextProps.open});
+        this.setState({open:nextProps.open})
       }
     }
     
     handleClick(){
-    this.setState({open:!this.state.open});
+    this.setState({open:!this.state.open})
     }
     
     render(){
@@ -55,8 +54,12 @@ import React from 'react';
       }
       return(
         <div style={styles.container} 
-          onClick={this.props.onClick ? this.props.onClick: 
-            ()=> {this.handleClick()}}>
+          onClick={ 
+                    this.props.onClick?
+                    this.props.onClick: 
+                    ()=> {this.handleClick()}
+                  }
+        >
           <div style={{...styles.line,...styles.lineTop}}/>
           <div style={{...styles.line,...styles.lineMiddle}}/>
           <div style={{...styles.line,...styles.lineBottom}}/>
@@ -64,4 +67,4 @@ import React from 'react';
       )
     }
   }
-  export default MenuButton;
+  export default MenuButton

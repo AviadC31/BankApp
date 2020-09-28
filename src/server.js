@@ -25,10 +25,10 @@ app.use(function (req, res, next) {
     next()
 })
 
-
 app.get('/transactions', (req, res) => {
     Transaction.find({}).then(transactions => res.send(transactions))
 })
+
 app.get('/statistics', (req, res) => {
     Transaction.aggregate(
         [
@@ -36,7 +36,7 @@ app.get('/statistics', (req, res) => {
                 $group: {
                     _id: "$category",
                     total: {
-                        $sum: "$amount"
+                         $sum: "$amount"
                     },
                 },
             }
@@ -50,10 +50,9 @@ app.post('/transaction', (req, res) => {
 })
 app.delete('/transaction', function (req, res) {
     const { id } = req.body
-    Transaction.findByIdAndDelete(id, function (err, transaction) {
-        if (err) res.send(err)
-        else res.send(transaction._id)
-    })
+    Transaction.findByIdAndDelete(id)
+    .then(transaction => res.send(transaction._id))
+    .catch(()=>res.end())
 })
 
 app.listen(8080, () => console.log("server up and running on port 8080"))
