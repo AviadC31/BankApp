@@ -4,7 +4,7 @@ import axios from 'axios'
 class Transaction extends Component {
 
   deleteTransaction = async () =>{
-   const id = await axios.delete("http://localhost:8080/transaction", {data: {id:this.props.transaction._id}})
+   const id = await axios.delete(`${process.env.REACT_APP_API_URL || 'http://localhost:8080'}/transaction`, {data: {id:this.props.transaction._id}})
    this.props.deleteT(id.data)
   }
 

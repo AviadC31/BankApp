@@ -27,7 +27,7 @@ class Operations extends Component {
       vendor: s.vendor,
       category: s.category
     }
-    const transDetails = await axios.post("http://localhost:8080/transaction", transaction)
+    const transDetails = await axios.post(`${process.env.REACT_APP_API_URL || 'http://localhost:8080'}/transaction`, transaction)
     let arr=[]
     arr =[...this.props.state.data]
     arr.push(transDetails.data)

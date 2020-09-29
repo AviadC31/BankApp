@@ -23,7 +23,7 @@ class Statistics extends Component {
 
     componentDidMount = async () => {
         const state = {
-            statistics: await axios.get("http://localhost:8080/statistics"),
+            statistics: await axios.get(`${process.env.REACT_APP_API_URL || 'http://localhost:8080'}/statistics`),
             labels: [],
             datasets: [
                 {

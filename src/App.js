@@ -21,7 +21,7 @@ export class App extends Component {
   }
 
   componentDidMount = async () => {
-    const transactions = await axios.get("http://localhost:8080/transactions")
+    const transactions = await axios.get(`${process.env.REACT_APP_API_URL || 'http://localhost:8080'}/transactions`)
     this.setState({ data: transactions.data })
     this.updateBalance()
   }

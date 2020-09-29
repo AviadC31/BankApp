@@ -3,7 +3,8 @@ const mongoose = require('mongoose')
 const express = require('express')
 const path = require('path')
 const app = express()
-
+require('dotenv').config()
+const port = process.env.PORT || 8080
 const transactionSchema = new mongoose.Schema({
     amount: Number,
     category: String,
@@ -12,7 +13,12 @@ const transactionSchema = new mongoose.Schema({
 
 const Transaction = mongoose.model("Transaction", transactionSchema)
 
-mongoose.connect("mongodb://localhost/bankapp", { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/bankapp',
+    {
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+    }
+)
 
 app.use(express.static(path.join(__dirname, 'dist')))
 app.use(express.static(path.join(__dirname, 'node_modules')))
@@ -36,7 +42,7 @@ app.get('/statistics', (req, res) => {
                 $group: {
                     _id: "$category",
                     total: {
-                         $sum: "$amount"
+                        $sum: "$amount"
                     },
                 },
             }
@@ -51,8 +57,8 @@ app.post('/transaction', (req, res) => {
 app.delete('/transaction', function (req, res) {
     const { id } = req.body
     Transaction.findByIdAndDelete(id)
-    .then(transaction => res.send(transaction._id))
-    .catch(()=>res.end())
+        .then(transaction => res.send(transaction._id))
+        .catch(() => res.end())
 })
 
-app.listen(8080, () => console.log("server up and running on port 8080"))
+app.listen(port, () => console.log("server up and running on port " + port))
